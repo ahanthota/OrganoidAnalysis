@@ -1,6 +1,6 @@
 Flask>=2.0.0
 gunicorn>=21.0.0
-opencv-python>=4.5.0
+opencv-python-headless>=4.5.0
 numpy>=1.21.0
 # Optional deep learning dependencies (methods have fallbacks if not installed):
 # tensorflow>=2.8.0  # For U-Net method

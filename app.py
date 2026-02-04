@@ -34,6 +34,11 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 RESULTS_FOLDER = 'static/results'
 
+# Vercel specific: Use /tmp because the file system is read-only
+if os.environ.get('VERCEL') == '1':
+    UPLOAD_FOLDER = '/tmp/uploads'
+    RESULTS_FOLDER = '/tmp/results'
+
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(RESULTS_FOLDER, exist_ok=True)
 
@@ -45,6 +50,11 @@ def cleanup_folders():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/cdn_image/<path:filename>')
+def cdn_image(filename):
+    """Serve images from the upload folder (needed for Vercel /tmp)"""
+    return send_file(os.path.join(UPLOAD_FOLDER, filename))
 
 @app.route('/methods')
 def methods():
@@ -130,8 +140,8 @@ def analyze():
                 debug_name = f"debug_day{day}.jpg"
 
             debug_path_abs = os.path.join(UPLOAD_FOLDER, debug_subfolder, debug_name)
-            debug_url = f"/{debug_path_abs}"
-            orig_url = f"/{image_map[day]}"
+            debug_url = f"/cdn_image/{debug_subfolder}/{debug_name}"
+            orig_url = f"/cdn_image/{os.path.basename(image_map[day])}"
             
             res['original_url'] = orig_url
             res['debug_url'] = debug_url

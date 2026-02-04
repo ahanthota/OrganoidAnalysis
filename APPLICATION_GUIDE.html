@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organoid Analysis Application - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        h2 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 1.5em;
+        }
+        
+        h4 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        .method-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .method-card h4 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        .method-card strong {
+            color: #764ba2;
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        .info-box {
+            background: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #856404;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #155724;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .workflow-diagram {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .step {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+        
+        .arrow {
+            display: inline-block;
+            color: #667eea;
+            font-size: 1.5em;
+            margin: 0 10px;
+        }
+        
+        footer {
+            background: #2d2d2d;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧬 Organoid Analysis Application</h1>
+            <p>Complete Guide to Understanding and Using the Application</p>
+        </header>
+        
+        <div class="content">
+            <section id="overview">
+                <h2>📋 Overview</h2>
+                <p>
+                    The <strong>Organoid Analysis Application</strong> is a comprehensive web-based tool designed to analyze organoid cell growth over time using advanced computer vision and deep learning techniques. The application processes time-series images of organoids (typically Day 1, Day 2, Day 3, Day 4, etc.) and provides detailed metrics including organoid count, size distribution, growth rates, and visual analysis.
+                </p>
+                <p>
+                    The application runs as a <span class="highlight">standalone Windows executable</span> that bundles a local web server, eliminating the need for users to install Python, Flask, or any dependencies. Simply double-click the executable, and a web browser automatically opens to the analysis interface.
+                </p>
+            </section>
+            
+            <section id="table-of-contents">
+                <div class="toc">
+                    <h3>Table of Contents</h3>
+                    <ul>
+                        <li><a href="#overview">1. Overview</a></li>
+                        <li><a href="#how-it-works">2. How It Works</a></li>
+                        <li><a href="#architecture">3. Application Architecture</a></li>
+                        <li><a href="#analysis-methods">4. Analysis Methods</a></li>
+                        <li><a href="#workflow">5. Complete Workflow</a></li>
+                        <li><a href="#usage">6. Usage Guide</a></li>
+                        <li><a href="#results">7. Understanding Results</a></li>
+                        <li><a href="#technical-details">8. Technical Details</a></li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="how-it-works">
+                <h2>⚙️ How It Works</h2>
+                
+                <h3>Application Flow</h3>
+                <div class="workflow-diagram">
+                    <div class="step">1. Launch EXE</div>
+                    <span class="arrow">→</span>
+                    <div class="step">2. Start Server</div>
+                    <span class="arrow">→</span>
+                    <div class="step">3. Open Browser</div>
+                    <span class="arrow">→</span>
+                    <div class="step">4. Upload Images</div>
+                    <span class="arrow">→</span>
+                    <div class="step">5. Select Method</div>
+                    <span class="arrow">→</span>
+                    <div class="step">6. Analyze</div>
+                    <span class="arrow">→</span>
+                    <div class="step">7. View Results</div>
+                </div>
+                
+                <h3>Core Components</h3>
+                <ol>
+                    <li><strong>Desktop Application Wrapper</strong>: The executable file (<code>OrganoidAnalysis.exe</code>) that bundles the entire application</li>
+                    <li><strong>Flask Web Server</strong>: A lightweight Python web server that runs locally on port 5174</li>
+                    <li><strong>Web Interface</strong>: HTML/CSS/JavaScript frontend for user interaction</li>
+                    <li><strong>Analysis Engine</strong>: Multiple computer vision algorithms for organoid detection and measurement</li>
+                    <li><strong>Image Processing Pipeline</strong>: OpenCV-based preprocessing, segmentation, and feature extraction</li>
+                </ol>
+                
+                <div class="info-box">
+                    <strong>Key Feature:</strong> The application runs completely offline. All processing happens locally on the user's machine, ensuring data privacy and eliminating the need for internet connectivity.
+                </div>
+            </section>
+            
+            <section id="architecture">
+                <h2>🏗️ Application Architecture</h2>
+                
+                <h3>System Architecture</h3>
+                <pre class="code-block">
+┌─────────────────────────────────────────────────────────┐
+│              OrganoidAnalysis.exe (Windows)              │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │         Flask Web Server (Port 5174)             │   │
+│  │  ┌────────────────────────────────────────────┐  │   │
+│  │  │        Web Interface (Browser)             │  │   │
+│  │  │  - File Upload                             │  │   │
+│  │  │  - Method Selection                        │  │   │
+│  │  │  - Results Visualization                   │  │   │
+│  │  └────────────────────────────────────────────┘  │   │
+│  │  ┌────────────────────────────────────────────┐  │   │
+│  │  │        Analysis Engine                     │  │   │
+│  │  │  - Image Preprocessing                     │  │   │
+│  │  │  - Segmentation Methods                    │  │   │
+│  │  │  - Feature Extraction                      │  │   │
+│  │  │  - Statistical Analysis                    │  │   │
+│  │  └────────────────────────────────────────────┘  │   │
+│  │  ┌────────────────────────────────────────────┐  │   │
+│  │  │        Data Storage                        │  │   │
+│  │  │  - Uploaded Images                         │  │   │
+│  │  │  - Processed Results                       │  │   │
+│  │  │  - Debug Visualizations                    │  │   │
+│  │  └────────────────────────────────────────────┘  │   │
+│  └──────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────┘
+                </pre>
+                
+                <h3>Technology Stack</h3>
+                <table>
+                    <tr>
+                        <th>Component</th>
+                        <th>Technology</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td>Backend Framework</td>
+                        <td>Flask (Python)</td>
+                        <td>Web server and API endpoints</td>
+                    </tr>
+                    <tr>
+                        <td>Image Processing</td>
+                        <td>OpenCV (cv2)</td>
+                        <td>Image preprocessing, segmentation, feature extraction</td>
+                    </tr>
+                    <tr>
+                        <td>Numerical Computing</td>
+                        <td>NumPy</td>
+                        <td>Array operations and mathematical computations</td>
+                    </tr>
+                    <tr>
+                        <td>Deep Learning</td>
+                        <td>TensorFlow/Keras</td>
+                        <td>U-Net and StarDist models (optional)</td>
+                    </tr>
+                    <tr>
+                        <td>Frontend</td>
+                        <td>HTML5, CSS3, JavaScript, Chart.js</td>
+                        <td>User interface and data visualization</td>
+                    </tr>
+                    <tr>
+                        <td>Packaging</td>
+                        <td>PyInstaller</td>
+                        <td>Bundling Python application as Windows executable</td>
+                    </tr>
+                </table>
+            </section>
+            
+            <section id="analysis-methods">
+                <h2>🔬 Analysis Methods</h2>
+                <p>The application provides <strong>8 different analysis methods</strong>, each optimized for different scenarios and image characteristics:</p>
+                
+                <div class="method-card">
+                    <h4>1. Basic Thresholding (Otsu)</h4>
+                    <p><strong>How it works:</strong> Uses Otsu's automatic thresholding algorithm to separate organoids from background based on pixel intensity values.</p>
+                    <p><strong>Algorithm:</strong></p>
+                    <ul>
+                        <li>Converts image to grayscale</li>
+                        <li>Applies Gaussian blur for noise reduction</li>
+                        <li>Uses Otsu's method to find optimal threshold</li>
+                        <li>Performs automatic background/foreground inversion detection</li>
+                        <li>Identifies contours and calculates areas</li>
+                    </ul>
+                    <p><strong>Best for:</strong> Clear, high-contrast images with well-separated organoids</p>
+                    <p><strong>Limitations:</strong> Merges touching or overlapping organoids</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>2. Watershed Segmentation</h4>
+                    <p><strong>How it works:</strong> Advanced algorithm that can separate touching organoids by treating the image as a topographic map and flooding from local minima (organoid centers).</p>
+                    <p><strong>Algorithm:</strong></p>
+                    <ul>
+                        <li>Preprocessing: Otsu thresholding and morphological opening</li>
+                        <li>Distance transform to find organoid centers</li>
+                        <li>Marker-based watershed segmentation</li>
+                        <li>Separates touching objects based on intensity peaks</li>
+                    </ul>
+                    <p><strong>Best for:</strong> Images with touching or clumped organoids</p>
+                    <p><strong>Advantages:</strong> Better separation of overlapping objects compared to basic thresholding</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>3. Hough Circle Transform</h4>
+                    <p><strong>How it works:</strong> Mathematical method that detects circular shapes in images, useful for spherical organoids. Estimates 3D volume from 2D projections.</p>
+                    <p><strong>Algorithm:</strong></p>
+                    <ul>
+                        <li>Edge detection using Canny algorithm</li>
+                        <li>Hough circle transform to detect circular shapes</li>
+                        <li>Volume estimation: V = (4/3)πr³</li>
+                        <li>Can detect overlapping circles</li>
+                    </ul>
+                    <p><strong>Best for:</strong> Spherical organoids, volume estimation, heavily overlapping structures</p>
+                    <p><strong>Unique feature:</strong> Provides 3D volume estimates from 2D images</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>4. StarDist (Deep Learning)</h4>
+                    <p><strong>How it works:</strong> State-of-the-art deep learning model specifically designed for star-convex object detection. Uses neural networks to learn optimal segmentation boundaries.</p>
+                    <p><strong>Algorithm:</strong></p>
+                    <ul>
+                        <li>Pre-trained convolutional neural network</li>
+                        <li>Star-convex polygon representation</li>
+                        <li>Handles irregular shapes better than geometric methods</li>
+                        <li>Fallback to geometric method if TensorFlow unavailable</li>
+                    </ul>
+                    <p><strong>Best for:</strong> Irregularly shaped organoids, complex morphologies</p>
+                    <p><strong>Requirements:</strong> TensorFlow (optional - has fallback)</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>5. U-Net (Deep Learning)</h4>
+                    <p><strong>How it works:</strong> Encoder-decoder convolutional neural network architecture originally designed for biomedical image segmentation. Uses skip connections to preserve fine details.</p>
+                    <p><strong>Algorithm:</strong></p>
+                    <ul>
+                        <li>Encoder path: Feature extraction through convolutions</li>
+                        <li>Decoder path: Upsampling and feature reconstruction</li>
+                        <li>Skip connections: Preserve spatial information</li>
+                        <li>Output: Probability map for each pixel</li>
+                        <li>Thresholding and post-processing to create binary masks</li>
+                    </ul>
+                    <p><strong>Best for:</strong> Precise boundary detection, complex backgrounds, variable organoid sizes</p>
+                    <p><strong>Unique feature:</strong> Provides probability heatmaps showing segmentation confidence</p>
+                    <p><strong>Requirements:</strong> TensorFlow (optional - has fallback)</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>6. Advanced Morphology & Cell Count</h4>
+                    <p><strong>How it works:</strong> Combines watershed segmentation with advanced morphological feature extraction to estimate cell counts and characterize organoid shape.</p>
+                    <p><strong>Features calculated:</strong></p>
+                    <ul>
+                        <li><strong>Solidity:</strong> Ratio of organoid area to convex hull area (measures compactness)</li>
+                        <li><strong>Eccentricity:</strong> Measure of how elongated an organoid is (0 = circle, 1 = line)</li>
+                        <li><strong>Cell Count Estimation:</strong> Uses OSCAR-inspired regression: cells = area / average_cell_area</li>
+                    </ul>
+                    <p><strong>Best for:</strong> Detailed morphological analysis, cell proliferation studies</p>
+                    <p><strong>Inspiration:</strong> MOrgAna and OSCAR tools</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>7. ZEISS arivis Pro (Simulation)</h4>
+                    <p><strong>How it works:</strong> Simulates the 3D volumetric segmentation workflow of commercial microscopy software. Creates wireframe representations and volume estimates.</p>
+                    <p><strong>Algorithm:</strong></p>
+                    <ul>
+                        <li>Multi-scale processing for 3D simulation</li>
+                        <li>Volume estimation from 2D projections</li>
+                        <li>Wireframe visualization</li>
+                    </ul>
+                    <p><strong>Best for:</strong> Users familiar with commercial tools, 3D analysis workflows</p>
+                </div>
+                
+                <div class="method-card">
+                    <h4>8. AssayScope (Simulation)</h4>
+                    <p><strong>How it works:</strong> High-throughput screening approach focusing on population-level statistics and homogeneity metrics.</p>
+                    <p><strong>Features:</strong></p>
+                    <ul>
+                        <li>Mean radius calculation</li>
+                        <li>Coefficient of Variation (CV)</li>
+                        <li>Homogeneity score: 100 - CV%</li>
+                        <li>Outlier detection</li>
+                    </ul>
+                    <p><strong>Best for:</strong> High-throughput experiments, population studies, quality control</p>
+                </div>
+            </section>
+            
+            <section id="workflow">
+                <h2>📊 Complete Workflow</h2>
+                
+                <h3>Step-by-Step Processing Pipeline</h3>
+                <ol>
+                    <li><strong>Image Upload</strong>
+                        <ul>
+                            <li>User selects multiple images (typically Day 1, Day 2, Day 3, Day 4)</li>
+                            <li>Files are saved to <code>static/uploads/</code> directory</li>
+                            <li>Images are sorted by filename to determine temporal order</li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Image Preprocessing</strong>
+                        <ul>
+                            <li>Images are loaded using OpenCV</li>
+                            <li>Conversion to grayscale (if needed)</li>
+                            <li>Noise reduction using Gaussian blur</li>
+                            <li>Contrast normalization</li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Segmentation</strong>
+                        <ul>
+                            <li>Selected analysis method is applied to each image</li>
+                            <li>Organoids are separated from background</li>
+                            <li>Individual organoids are identified and labeled</li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Feature Extraction</strong>
+                        <ul>
+                            <li>Area calculation (pixels²)</li>
+                            <li>Contour detection for boundaries</li>
+                            <li>Additional features based on selected method (circularity, volume, etc.)</li>
+                            <li>Filtering: Small objects (&lt; 80-100 pixels) removed as noise</li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Statistical Analysis</strong>
+                        <ul>
+                            <li>Count: Number of detected organoids</li>
+                            <li>Average size: Mean area across all organoids</li>
+                            <li>Total area: Sum of all organoid areas</li>
+                            <li>Growth rate: Percentage change from previous day</li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Visualization Generation</strong>
+                        <ul>
+                            <li>Debug images created showing detected boundaries</li>
+                            <li>Contours overlaid on original images</li>
+                            <li>Method-specific visualizations (heatmaps, wireframes, etc.)</li>
+                            <li>Saved to <code>static/uploads/debug_output_*/</code></li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Results Presentation</strong>
+                        <ul>
+                            <li>Statistics displayed in cards</li>
+                            <li>Growth trends shown in interactive charts</li>
+                            <li>Visual gallery of processed images</li>
+                            <li>Export capabilities through browser</li>
+                        </ul>
+                    </li>
+                </ol>
+            </section>
+            
+            <section id="usage">
+                <h2>📖 Usage Guide</h2>
+                
+                <h3>Getting Started</h3>
+                <ol>
+                    <li><strong>Download and Extract</strong>
+                        <ul>
+                            <li>Download <code>OrganoidAnalysis.exe</code> from GitHub Actions artifacts</li>
+                            <li>No installation required - just run the executable</li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Launch Application</strong>
+                        <ul>
+                            <li>Double-click <code>OrganoidAnalysis.exe</code></li>
+                            <li>Wait 5-10 seconds for the server to start</li>
+                            <li>Browser will open automatically to <code>http://127.0.0.1:5174</code></li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Upload Images</strong>
+                        <ul>
+                            <li>Click "Click to upload" button</li>
+                            <li>Select multiple images (Day 1, Day 2, etc.)</li>
+                            <li>Supported formats: JPG, PNG, JPEG</li>
+                            <li>Images are automatically sorted by filename</li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Select Analysis Method</strong>
+                        <ul>
+                            <li>Choose from dropdown menu</li>
+                            <li>Read method descriptions to select the best one</li>
+                            <li>Recommended: Watershed for clumped organoids, U-Net for precision</li>
+                        </ul>
+                    </li>
+                    
+                    <li><strong>Run Analysis</strong>
+                        <ul>
+                            <li>Click "Analyze Data" button</li>
+                            <li>Wait for processing (typically 10-30 seconds)</li>
+                            <li>Results appear automatically when complete</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <div class="warning-box">
+                    <strong>Important Notes:</strong>
+                    <ul>
+                        <li>First run may take longer (extracting bundled files)</li>
+                        <li>Firewall may prompt for permission - allow localhost connections</li>
+                        <li>Keep the browser window open while analyzing</li>
+                        <li>Do not close the terminal/console window (if visible)</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="results">
+                <h2>📈 Understanding Results</h2>
+                
+                <h3>Statistics Cards</h3>
+                <p>The application displays several key metrics:</p>
+                <ul>
+                    <li><strong>Latest Count:</strong> Number of organoids detected on the most recent day</li>
+                    <li><strong>Total Growth:</strong> Percentage change in organoid count from Day 1 to latest day</li>
+                    <li><strong>Average Size:</strong> Mean area of organoids in pixels²</li>
+                    <li><strong>Total Area:</strong> Sum of all organoid areas (biomass indicator)</li>
+                    <li><strong>Growth Rate:</strong> Day-to-day percentage changes</li>
+                </ul>
+                
+                <h3>Charts and Visualizations</h3>
+                <ul>
+                    <li><strong>Growth Trend (Count):</strong> Line chart showing organoid count over time
+                        <ul>
+                            <li>Increasing: Suggests proliferation</li>
+                            <li>Decreasing + Size increasing: Suggests fusion</li>
+                            <li>Stable: Mature culture</li>
+                        </ul>
+                    </li>
+                    <li><strong>Size Distribution:</strong> Bar chart showing average size or total area
+                        <ul>
+                            <li>Upward trend: Confirms growth</li>
+                            <li>Plateau: Growth stabilization</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h3>Visual Analysis</h3>
+                <p>Each processed image shows:</p>
+                <ul>
+                    <li><strong>Original image</strong> with detected boundaries overlaid</li>
+                    <li><strong>Color-coded contours</strong> indicating organoids</li>
+                    <li><strong>Method-specific visualizations:</strong>
+                        <ul>
+                            <li>Watershed: Red contours with yellow boundaries</li>
+                            <li>U-Net: Green contours with probability heatmap</li>
+                            <li>Hough: Magenta circles showing detected spheres</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <h3>Interpreting Results</h3>
+                <table>
+                    <tr>
+                        <th>Observation</th>
+                        <th>Interpretation</th>
+                    </tr>
+                    <tr>
+                        <td>Count decreases, Size increases</td>
+                        <td>Organoids are fusing together</td>
+                    </tr>
+                    <tr>
+                        <td>Count increases, Size stable</td>
+                        <td>Organoids are proliferating</td>
+                    </tr>
+                    <tr>
+                        <td>Total area increases steadily</td>
+                        <td>Healthy growth phase</td>
+                    </tr>
+                    <tr>
+                        <td>Total area decreases</td>
+                        <td>Possible cell death or segmentation issue</td>
+                    </tr>
+                    <tr>
+                        <td>Circularity near 1.0</td>
+                        <td>Organoids are spherical</td>
+                    </tr>
+                    <tr>
+                        <td>Low circularity (&lt; 0.5)</td>
+                        <td>Irregular or elongated shapes</td>
+                    </tr>
+                </table>
+            </section>
+            
+            <section id="technical-details">
+                <h2>🔧 Technical Details</h2>
+                
+                <h3>File Structure</h3>
+                <pre class="code-block">
+OrganoidAnalysis/
+├── OrganoidAnalysis.exe          # Main executable
+├── _internal/                    # Bundled dependencies
+│   ├── python39.dll
+│   ├── [Python packages]
+│   ├── templates/                # HTML templates
+│   └── [data files]
+└── static/                       # Created at runtime
+    ├── uploads/                  # User uploaded images
+    └── results/                  # Analysis results
+                </pre>
+                
+                <h3>Port and Networking</h3>
+                <ul>
+                    <li><strong>Port:</strong> 5174 (configurable via PORT environment variable)</li>
+                    <li><strong>Host:</strong> 127.0.0.1 (localhost only - no external access)</li>
+                    <li><strong>Protocol:</strong> HTTP (not HTTPS - local only)</li>
+                    <li><strong>Security:</strong> Completely local - no data leaves the machine</li>
+                </ul>
+                
+                <h3>Performance Characteristics</h3>
+                <ul>
+                    <li><strong>Startup time:</strong> 5-15 seconds (first run may be longer)</li>
+                    <li><strong>Analysis time:</strong> 10-30 seconds per image set (depends on method and image size)</li>
+                    <li><strong>Memory usage:</strong> ~200-500 MB (depends on image sizes)</li>
+                    <li><strong>Disk space:</strong> ~100-200 MB for the executable</li>
+                </ul>
+                
+                <h3>System Requirements</h3>
+                <ul>
+                    <li><strong>OS:</strong> Windows 10 or 11 (64-bit)</li>
+                    <li><strong>RAM:</strong> 4 GB minimum, 8 GB recommended</li>
+                    <li><strong>Disk:</strong> 500 MB free space</li>
+                    <li><strong>No Python required</strong> - Everything is bundled</li>
+                    <li><strong>No internet required</strong> - Fully offline operation</li>
+                </ul>
+                
+                <h3>Dependencies Included</h3>
+                <ul>
+                    <li>Python 3.9.13 runtime</li>
+                    <li>Flask 2.0+</li>
+                    <li>OpenCV (cv2) 4.5+</li>
+                    <li>NumPy 1.21+</li>
+                    <li>Werkzeug, Jinja2 (Flask dependencies)</li>
+                    <li>TensorFlow (optional, for U-Net/StarDist)</li>
+                    <li>Chart.js (for frontend visualizations)</li>
+                </ul>
+                
+                <h3>Fallback Mechanisms</h3>
+                <div class="info-box">
+                    <p><strong>Smart Error Handling:</strong> The application includes fallback mechanisms:</p>
+                    <ul>
+                        <li>If TensorFlow is unavailable, U-Net and StarDist automatically use advanced image processing fallbacks</li>
+                        <li>If a specific method fails, the application gracefully handles errors and reports them to the user</li>
+                        <li>All methods have been tested to work without deep learning libraries if needed</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="troubleshooting">
+                <h2>🛠️ Troubleshooting</h2>
+                
+                <h3>Common Issues</h3>
+                
+                <h4>Application won't start</h4>
+                <ul>
+                    <li>Check Windows Defender/Antivirus - may be blocking executable</li>
+                    <li>Ensure port 5174 is not in use by another application</li>
+                    <li>Try running as administrator</li>
+                    <li>Check Windows Event Viewer for error messages</li>
+                </ul>
+                
+                <h4>Browser doesn't open automatically</h4>
+                <ul>
+                    <li>Manually navigate to <code>http://127.0.0.1:5174</code></li>
+                    <li>Check if firewall is blocking the connection</li>
+                    <li>Wait 10-15 seconds for server to fully start</li>
+                </ul>
+                
+                <h4>Analysis fails or gives incorrect results</h4>
+                <ul>
+                    <li>Check image quality - ensure good contrast between organoids and background</li>
+                    <li>Try a different analysis method</li>
+                    <li>Verify images are in correct format (JPG, PNG)</li>
+                    <li>Check debug output images to see what was detected</li>
+                </ul>
+                
+                <h4>Slow performance</h4>
+                <ul>
+                    <li>Large images take longer to process - consider resizing</li>
+                    <li>U-Net and StarDist are slower than geometric methods</li>
+                    <li>Close other applications to free up memory</li>
+                </ul>
+            </section>
+            
+            <section id="advanced">
+                <h2>🚀 Advanced Topics</h2>
+                
+                <h3>Customization</h3>
+                <p>The application can be customized by modifying the source code:</p>
+                <ul>
+                    <li><strong>Port change:</strong> Edit <code>desktop_app.py</code>, line with <code>port = 5174</code></li>
+                    <li><strong>Threshold values:</strong> Modify area thresholds in analysis modules</li>
+                    <li><strong>Method parameters:</strong> Adjust algorithm-specific settings in respective files</li>
+                </ul>
+                
+                <h3>Extending Functionality</h3>
+                <p>To add new analysis methods:</p>
+                <ol>
+                    <li>Create new file: <code>organoid_analysis_yourmethod.py</code></li>
+                    <li>Implement function: <code>analyze_organoids_yourmethod(image_paths)</code></li>
+                    <li>Add to <code>desktop_app.py</code> imports and route handler</li>
+                    <li>Add option to frontend dropdown in <code>templates/index.html</code></li>
+                    <li>Rebuild with PyInstaller</li>
+                </ol>
+                
+                <h3>Batch Processing</h3>
+                <p>For processing multiple image sets:</p>
+                <ul>
+                    <li>Process one set at a time through the web interface</li>
+                    <li>Save results before processing next set</li>
+                    <li>For automation, consider using the Python modules directly</li>
+                </ul>
+            </section>
+            
+            <section id="conclusion">
+                <h2>✅ Conclusion</h2>
+                <p>
+                    The Organoid Analysis Application provides a comprehensive, user-friendly solution for analyzing organoid growth over time. With multiple analysis methods, automatic visualization, and standalone operation, it enables researchers to quickly and accurately assess organoid cultures without requiring programming expertise or complex software installations.
+                </p>
+                <p>
+                    The application's modular design allows for easy extension and customization, making it suitable for a wide range of organoid research applications. Whether you're studying growth dynamics, morphological changes, or cell proliferation, this tool provides the computational power and ease of use needed for efficient analysis.
+                </p>
+                
+                <div class="success-box">
+                    <strong>Ready to Use!</strong> Download the executable, launch it, upload your images, and start analyzing your organoid cultures today.
+                </div>
+            </section>
+        </div>
+        
+        <footer>
+            <p>Organoid Analysis Application - Complete Documentation</p>
+            <p>Version 1.0 | Built with Flask, OpenCV, and Deep Learning</p>
+        </footer>
+    </div>
+</body>
+</html>

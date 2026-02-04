@@ -1,7 +1,12 @@
 from flask import Flask, render_template, request, jsonify, send_file
 import os
 import shutil
-import cv2
+try:
+    import cv2
+    CV2_AVAILABLE = True
+except ImportError as e:
+    CV2_AVAILABLE = False
+    print(f"Warning: OpenCV (cv2) not available: {e}")
 import glob
 
 from organoid_analysis import analyze_organoids as analyze_basic
@@ -46,6 +51,16 @@ def cleanup_folders():
     for folder in [UPLOAD_FOLDER, RESULTS_FOLDER]:
         if os.path.exists(folder):
             pass
+
+@app.route('/health')
+def health():
+    return jsonify({
+        'status': 'healthy',
+        'cv2': CV2_AVAILABLE,
+        'vercel': os.environ.get('VERCEL'),
+        'upload_folder': UPLOAD_FOLDER,
+        'python_version': os.sys.version
+    })
 
 @app.route('/')
 def index():
